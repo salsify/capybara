@@ -106,6 +106,17 @@ module Capybara
         @unsynchronized = orig
       end
 
+      ##
+      #
+      # Within the given block, prevent synchronize from having any exception.
+      #
+      #
+      def safe(*args)
+        unsynchronized { yield  }
+      rescue => e
+        e.message
+      end
+
     protected
 
       def driver

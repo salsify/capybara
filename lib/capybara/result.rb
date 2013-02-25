@@ -44,12 +44,12 @@ module Capybara
         "expected to find #{@query.description}"
       end
       if count > 0
-        message << ", found #{count} #{declension("match", "matches")}: " << @result.map(&:text).map(&:inspect).join(", ")
+        message << ", found #{count} #{declension("match", "matches")}: " << @result.map{|node| node.safe(&:text)}.map(&:inspect).join(", ")
       else
         message << " but there were no matches"
       end
       unless @rest.empty?
-        elements = @rest.map(&:text).map(&:inspect).join(", ")
+        elements = @rest.map{|node| node.safe(&:text)}.map(&:inspect).join(", ")
         message << ". Also found " << elements << ", which matched the selector but not all filters."
       end
       message
