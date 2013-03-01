@@ -137,6 +137,10 @@ module Capybara
         end
         Capybara::Result.new(elements, query)
       end
+
+      def safe
+        yield self# does not need to rescue result
+      end
     end
   end
 end

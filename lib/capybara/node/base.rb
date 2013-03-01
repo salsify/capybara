@@ -111,9 +111,9 @@ module Capybara
       # Within the given block, prevent synchronize from having any exception.
       #
       #
-      def safe(*args)
-        unsynchronized { yield  }
-      rescue => e
+      def safe
+        unsynchronized { yield self }
+      rescue Capybara::ElementNotFound => e
         e.message
       end
 
