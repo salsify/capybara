@@ -113,7 +113,8 @@ module Capybara
       #
       def safe
         unsynchronized { yield self }
-      rescue Capybara::ElementNotFound => e
+      rescue e
+        raise e unless driver.invalid_element_errors.include?(e.class) || e.is_a?(Capybara::ElementNotFound)
         e.message
       end
 
