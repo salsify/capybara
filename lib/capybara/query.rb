@@ -48,7 +48,7 @@ module Capybara
           true
         end
       rescue => e
-        raise e unless driver.invalid_element_errors.include?(e.class) || e.is_a?(Capybara::ElementNotFound)
+        raise e unless Capybara.current_session.driver.invalid_element_errors.include?(e.class) || e.is_a?(Capybara::ElementNotFound)
         false
       end
     end
